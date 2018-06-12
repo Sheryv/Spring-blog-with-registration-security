@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Blog'">
+
+<main layout:fragment="main">
+    <div class="row">
+        <div class="col-md-10">
+            <!--/*@thymesVar id="posts" type="List<com.sheryv.example.springblog.model.Post>"*/-->
+            <!--/*@thymesVar id="post" type="com.sheryv.example.springblog.model.Post"*/-->
+            <article class="post" th:each="post: ${posts}">
+                <h3>
+                    <a th:href="@{postview(id=${post.id})}" th:text="${post.title}">
+
+                    </a>
+                </h3>
+                <small class="text-muted">
+                    <span th:text="'Autor: '+${post.author.username}" th:remove="tag"></span>&nbsp;&nbsp;
+                        <i class="fa fa-clock-o"></i> <small th:text="${#dates.format(post.publishedAt, 'dd-MM-yy HH:mm')}"  th:remove="tag">At</small><br/> </small>
+                <p th:text="${post.summary}">
+
+                </p>
+                <div class="row justify-content-end">
+                    <div class="col-md-2 text-center">
+                        <a class="btn btn-sm btn-light"
+                           th:href="@{postview(id=${post.id})}">Czytaj więcej
+                            <i class="fa fa-angle-right"></i></a>
+                    </div>
+
+                </div>
+                <hr>
+            </article>
+            <div class="jumbotron" th:if="${#lists.isEmpty(posts)}">Brak postów</div>
+            <div th:unless="${#lists.isEmpty(posts)}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item previous" th:if="${page > 0}">
+                        <a th:href="@{blog(page=${page - 1})}">&larr; Nowsze posty</a>  &nbsp;&nbsp;&nbsp;
+                    </li>
+
+                    <li class="page-item next"  th:if="${page < pageCount}">
+                        <a th:href="@{blog(page=${page + 1})}">Starsze posty &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</html>

@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Lista wpisów'">
+
+<main layout:fragment="main">
+    <div class="row">
+        <!--/*@thymesVar id="posts" type="List<com.sheryv.example.springblog.model.Post>"*/-->
+        <article class="col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tytuł</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${posts}">
+                    <td scope="row" th:text="${post.id}"></td>
+                    <td ><a th:text="${post.title}" th:href="@{postview(id=${post.id})}"></a></td>
+                    <td th:text="${post.author.username}"></td>
+                    <td><a th:href="@{postedit(id=${post.id})}" class="text-info">Edytuj</a> | <a th:href="@{postdelete(id=${post.id})}" class="text-danger">Usuń</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
+</main>
+
+</html>

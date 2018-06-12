@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Lista użytkowników'">
+
+<main layout:fragment="main">
+    <div class="row">
+        <!--/*@thymesVar id="users" type="List<com.sheryv.example.springblog.model.User>"*/-->
+        <article class="col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Nazwa użytkownika</th>
+                    <th scope="col">Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <!--/*@thymesVar id="user" type="com.sheryv.example.springblog.model.User"*/-->
+                    <td scope="row" th:text="${user.id}"></td>
+                    <td th:text="${user.firstName} +' '+ ${user.lastName}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
+</main>
+
+</html>

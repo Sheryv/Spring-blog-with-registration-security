@@ -1,0 +1,87 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Strona główna'">
+
+<main layout:fragment="main">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Cechy
+            </h2>
+        </div>
+
+        <div class="col-md-4 p-1">
+            <div class="card text-center">
+                <div class="card-img-top">
+                            <span class="fa-stack fa-5x">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa fa-gamepad fa-stack-1x  fa-inverse"></i>
+                            </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Writualna rzeczywistość</h5>
+                    <p class="card-text">Trójwymarowy świat, po którym możemy się poruszać.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 p-1">
+
+            <div class="card text-center">
+                <div class="card-img-top">
+                            <span class="fa-stack fa-5x">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa fa-history fa-stack-1x fa-inverse"></i>
+                            </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Oparty na faktach</h5>
+                    <p class="card-text">Odwzorowanie miasta wykonane jest na podstwie wielu źródeł historycznych.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 p-1">
+            <div class="card text-center">
+                <div class="card-img-top">
+                            <span class="fa-stack fa-5x">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa fa-cube fa-stack-1x  fa-inverse"></i>
+                            </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Silnik Unreal Engine</h5>
+                    <p class="card-text">Zapewnia niesamowicie realistyczne efekty graficzne</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-8">
+                <p></p>
+                <p>Już teraz możesz dołączyć do grona pasjonatów rozwijających projekt</p>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-primary btn-block" th:href="@{register}" href="/register">Dołącz</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+</html>

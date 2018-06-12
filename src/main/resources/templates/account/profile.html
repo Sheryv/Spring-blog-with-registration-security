@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Konto'">
+
+<main layout:fragment="main">
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <strong>Nazwa użytkownika: </strong>
+            <!--/*@thymesVar id="user" type="com.sheryv.example.springblog.model.User"*/-->
+            <span th:text="${user.username}"></span><br/>
+            <strong>Email: </strong><span th:text="${user.email}"></span><br/>
+            <strong>Imię: </strong><span th:text="${user.firstName}"></span><br/>
+            <strong>Nazwisko: </strong><span th:text="${user.lastName}"></span><br/>
+            <strong>Role: </strong>
+            <ul>
+                <li th:each="r: ${user.roles}" th:text="${r.getName()}"></li>
+            </ul><br/>
+        </div>
+
+
+    </div>
+
+
+</main>
+
+</html>

@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Tworzenie nowego wpisu'">
+
+<main layout:fragment="main">
+    <div class="row">
+
+        <div class="col-md-10">
+            <!--/*@thymesVar id="post" type="com.sheryv.example.springblog.dto.PostDto"*/-->
+            <form th:action="@{postadd}" th:object="${post}" method="POST" enctype="utf8">
+                <div class="form-group">
+                    <label for="title">Tytuł</label>
+                    <input type="text" th:field="*{title}" class="form-control" id="title">
+                    <small th:each="error: ${#fields.errors('title')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="summary">Podsumowanie (widoczne na liście)</label>
+                    <textarea type="text" th:field="*{summary}" class="form-control" id="summary"></textarea>
+                    <small th:each="error: ${#fields.errors('summary')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Treść</label>
+                    <textarea type="text" th:field="*{content}" class="form-control" id="content"></textarea>
+                    <small th:each="error: ${#fields.errors('content')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <button type="submit" class="btn btn-primary pull-right">Utwórz</button>
+            </form>
+
+
+        </div>
+
+
+    </div>
+</main>
+
+</html>

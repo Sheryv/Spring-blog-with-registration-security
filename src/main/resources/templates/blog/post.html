@@ -1,0 +1,75 @@
+<!--/*@thymesVar id="post" type="com.sheryv.example.springblog.model.Post"*/-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorate="~{base}"
+      th:with="header=${post.title}">
+
+<main layout:fragment="main">
+    <div class="row">
+        <article class="col-lg-12">
+            <small class="text-muted">
+                <span th:text="'Autor: '+${post.author.username}" th:remove="tag"></span>&nbsp;&nbsp;
+                <i class="fa fa-clock-o"></i>
+                <small th:text="${#dates.format(post.publishedAt, 'dd-MM-yy HH:mm')}" th:remove="tag">At</small>
+                <br/></small>
+            <!--/*@thymesVar id="post" type="com.sheryv.example.springblog.model.Post"*/-->
+            <div th:utext="${post.content}"></div>
+            <br/>
+            <div sec:authorize="${hasRole('ROLE_ADMIN')}">
+                <a th:href="@{postedit(id=${post.id})}" class="btn btn-info text-white">Edytuj</a>&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{postdelete(id=${post.id})}"  class="btn btn-danger text-white">Usuń</a>
+            </div>
+        </article>
+
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <h4>Komentarze</h4>
+    <div class="row">
+        <div class="col-md-10" sec:authorize="${!isAuthenticated()}">
+            <p>
+                <a class="text-success" th:href="@{login}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> Zaloguj się
+                </a>
+                aby dodać komentarz.
+            </p>
+        </div>
+        <div class="col-md-10" sec:authorize="${isAuthenticated()}">
+            <!--/*@thymesVar id="comment" type="com.sheryv.example.springblog.dto.CommentDto"*/-->
+                <form th:action="@{postview(id=${post.id})}" th:object="${comment}" method="POST" enctype="utf8">
+
+                    <input type="hidden" th:value="${post.id}" th:field="*{id}">
+                    <div class="form-group">
+                        <label for="content">Treść komentarza</label>
+                        <textarea type="text" th:field="*{content}" class="form-control" id="content"></textarea>
+                        <small th:each="error: ${#fields.errors('content')}" th:text="${error}" class="form-text text-danger"></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary pull-right">Dodaj</button>
+                </form>
+            <br/>
+        </div>
+
+
+        <!--/*@thymesVar id="post" type="com.sheryv.example.springblog.model.Post"*/-->
+        <section th:each="c : ${post.comments}" class="col-md-12">
+            <div>
+                <hr>
+                <strong th:text="${c.author.username}"></strong><br>
+                <small th:text="${#dates.format(c.publishedAt, 'dd-MM-yy HH:mm')}" class="text-muted"></small>
+                <br>
+                <p th:text="${c.content}"></p>
+                <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == c.author.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a th:href="@{postcommentedit(id=${c.id})}" class="text-info">Edytuj</a> | <a th:href="@{postcommentdelete(id=${c.id}, post_id=${post.id})}" class="text-danger">Usuń</a>
+                </div>
+            </div>
+
+        </section>
+        <div th:if="${#lists.isEmpty(post.comments)}" class="col-sm-12">
+            <hr>
+            <p>Brak komentarzy</p>
+        </div>
+    </div>
+</main>
+
+</html>

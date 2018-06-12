@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" th:with="header='Rejestracja'">
+
+<main layout:fragment="main">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-4">
+
+            <!--/*@thymesVar id="user" type="com.sheryv.example.springblog.dto.UserDto"*/-->
+            <form th:action="@{register}" th:object="${user}" method="POST" enctype="utf8">
+                <!--<th:block th:if="${#fields.hasErrors('${user.*}')}">-->
+                    <!--<p th:each="error: ${#fields.errors('${user.*}')}" th:text="${error}" class="form-text text-danger"></p>-->
+                <!--</th:block>-->
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nazwa użytkownika</label>
+                    <input type="text" th:field="*{username}" class="form-control" id="exampleInputEmail1" minlength="3" maxlength="40">
+                    <small th:each="error: ${#fields.errors('username')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">Imię</label>
+                    <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
+                    <small th:each="error: ${#fields.errors('firstName')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Nazwisko</label>
+                    <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
+                    <small th:each="error: ${#fields.errors('lastName')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" th:field="*{email}" class="form-control" id="email" minlength="3" maxlength="255">
+                    <small th:each="error: ${#fields.errors('email')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" th:field="*{password}" class="form-control" id="password" minlength="3" maxlength="255">
+                    <small th:each="error: ${#fields.errors('password')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="matchingPassword">Powtórz hasło</label>
+                    <input type="password" th:field="*{matchingPassword}" class="form-control" id="matchingPassword" minlength="3" maxlength="255">
+                    <small th:each="error: ${#fields.errors('matchingPassword')}" th:text="${error}" class="form-text text-danger"></small>
+                </div>
+
+                <button type="submit" class="btn btn-primary offset-3 w-50">Wyślij</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+</html>
